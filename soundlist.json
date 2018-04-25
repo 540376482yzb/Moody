@@ -1,0 +1,34 @@
+[
+	{
+		"artist": "Eminem",
+		"lists": [
+			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
+			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
+			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
+			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
+			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
+			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
+			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
+			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
+			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
+			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
+			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
+			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
+			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" }
+		]
+	},
+	{
+		"artist": "Eminem2",
+		"lists": [
+			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
+			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" }
+		]
+	},
+	{
+		"artist": "Eminem3",
+		"lists": [
+			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
+			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" }
+		]
+	}
+]
