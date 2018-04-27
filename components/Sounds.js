@@ -8,7 +8,13 @@ export default class SoundsScreen extends React.Component {
 		soundList.forEach(item => {
 			const artist = item.artist
 			item.lists.forEach(sound => {
-				arr.push({ artist, title: sound.title, url: sound.url, duration: sound.duration })
+				arr.push({
+					artist,
+					title: sound.title,
+					url: sound.url,
+					duration: sound.duration,
+					albumCover: sound.albumCover
+				})
 			})
 		})
 		return arr

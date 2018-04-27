@@ -2,33 +2,100 @@
 	{
 		"artist": "Eminem",
 		"lists": [
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" }
+			{
+				"title": "Like the",
+				"url": "some",
+				"duration": "03",
+				"albumCover": "https://reactjs.org/logo-og.png"
+			},
+			{
+				"title": "Like the way you lie",
+				"url": "null",
+				"duration": "03:56",
+				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
+			},
+			{
+				"title": "Like the way you lie",
+				"url": "null",
+				"duration": "03:56",
+				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
+			},
+			{
+				"title": "Like the way you lie",
+				"url": "null",
+				"duration": "03:56",
+				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
+			},
+			{
+				"title": "Like the way you lie",
+				"url": "null",
+				"duration": "03:56",
+				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
+			},
+			{
+				"title": "Like the way you lie",
+				"url": "null",
+				"duration": "03:56",
+				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
+			}
 		]
 	},
 	{
 		"artist": "Eminem2",
 		"lists": [
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" }
+			{
+				"title": "Like the way you lie",
+				"url": "null",
+				"duration": "03:56",
+				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
+			},
+			{
+				"title": "Like the way you lie",
+				"url": "null",
+				"duration": "03:56",
+				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
+			},
+			{
+				"title": "Like the way you lie",
+				"url": "null",
+				"duration": "03:56",
+				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
+			},
+			{
+				"title": "Like the way you lie",
+				"url": "null",
+				"duration": "03:56",
+				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
+			},
+			{
+				"title": "Like the way you lie",
+				"url": "null",
+				"duration": "03:56",
+				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
+			}
 		]
 	},
 	{
 		"artist": "Eminem3",
 		"lists": [
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" }
+			{
+				"title": "Like the way you lie",
+				"url": "null",
+				"duration": "03:56",
+				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
+			},
+			{
+				"title": "Like the way you lie",
+				"url": "null",
+				"duration": "03:56",
+				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
+			},
+			{
+				"title": "Like the way you lie",
+				"url": "null",
+				"duration": "03:56",
+				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
+			}
 		]
 	}
 ]

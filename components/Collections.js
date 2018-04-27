@@ -30,10 +30,13 @@ export default (Collections = TabNavigator(
 			}
 		}),
 		tabBarOptions: {
+			style: {
+				backgroundColor: 'tomato'
+			},
 			tabBarComponent: TabBarTop,
 			tabBarPosition: 'top',
 			activeTintColor: 'white',
-			inactiveTintColor: 'gray'
+			inactiveTintColor: '#F5F5F5'
 		},
 		animationEnabled: true,
 		swipeEnabled: true

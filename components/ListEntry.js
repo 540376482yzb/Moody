@@ -1,14 +1,15 @@
 import React from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
-
-export default class ListEntry extends React.Component {
+import { withNavigation } from 'react-navigation'
+export class ListEntry extends React.Component {
 	_onPressButton() {
-		Alert.alert('You tapped the button!')
+		const { albumCover, title, artist } = this.props.entry
+		this.props.navigation.navigate('Play', {
+			title,
+			artist
+		})
 	}
 
-	_onLongPressButton() {
-		Alert.alert('You long-pressed the button!')
-	}
 	render() {
 		const { title, artist, duration } = this.props.entry
 		return (
@@ -54,3 +55,5 @@ const styles = {
 		marginRight: 20
 	}
 }
+
+export default withNavigation(ListEntry)
