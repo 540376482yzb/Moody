@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity, Image } from 'react-native'
 import { withNavigation } from 'react-navigation'
 
 export class ArtistEntry extends React.Component {
@@ -14,13 +14,14 @@ export class ArtistEntry extends React.Component {
 			playLists
 		})
 	}
+
 	render() {
 		const { artist, artistImg, playLists } = this.props
 		return (
 			<TouchableOpacity onPress={this._onPress}>
 				<View style={styles.entry}>
 					<View style={styles.image}>
-						<Text>Image</Text>
+						<Image source={{ uri: artistImg }} style={styles.image} />
 					</View>
 					<View>
 						<Text>{artist}</Text>
@@ -45,7 +46,9 @@ const styles = {
 		paddingBottom: 15
 	},
 	image: {
-		marginRight: 30
+		marginRight: 30,
+		width: 40,
+		height: 40
 	},
 	sub: {
 		color: 'grey'

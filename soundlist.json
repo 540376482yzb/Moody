@@ -1,100 +1,15 @@
 [
 	{
 		"artist": "Eminem",
+		"artistImg":
+			"https://yt3.ggpht.com/a-/AJLlDp3OYmRjOHQJqi4UFHRtgqjMccQL6FoTOXehLA=s900-mo-c-c0xffffffff-rj-k-no",
 		"lists": [
 			{
-				"title": "Like the",
+				"title": "Like the way you lie",
 				"url": "some",
-				"duration": "03",
-				"albumCover": "https://reactjs.org/logo-og.png"
-			},
-			{
-				"title": "Like the way you lie",
-				"url": "null",
-				"duration": "03:56",
-				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
-			},
-			{
-				"title": "Like the way you lie",
-				"url": "null",
-				"duration": "03:56",
-				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
-			},
-			{
-				"title": "Like the way you lie",
-				"url": "null",
-				"duration": "03:56",
-				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
-			},
-			{
-				"title": "Like the way you lie",
-				"url": "null",
-				"duration": "03:56",
-				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
-			},
-			{
-				"title": "Like the way you lie",
-				"url": "null",
-				"duration": "03:56",
-				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
-			}
-		]
-	},
-	{
-		"artist": "Eminem2",
-		"lists": [
-			{
-				"title": "Like the way you lie",
-				"url": "null",
-				"duration": "03:56",
-				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
-			},
-			{
-				"title": "Like the way you lie",
-				"url": "null",
-				"duration": "03:56",
-				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
-			},
-			{
-				"title": "Like the way you lie",
-				"url": "null",
-				"duration": "03:56",
-				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
-			},
-			{
-				"title": "Like the way you lie",
-				"url": "null",
-				"duration": "03:56",
-				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
-			},
-			{
-				"title": "Like the way you lie",
-				"url": "null",
-				"duration": "03:56",
-				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
-			}
-		]
-	},
-	{
-		"artist": "Eminem3",
-		"lists": [
-			{
-				"title": "Like the way you lie",
-				"url": "null",
-				"duration": "03:56",
-				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
-			},
-			{
-				"title": "Like the way you lie",
-				"url": "null",
-				"duration": "03:56",
-				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
-			},
-			{
-				"title": "Like the way you lie",
-				"url": "null",
-				"duration": "03:56",
-				"albumCover": "https://pbs.twimg.com/profile_images/927446347879292930/Fi0D7FGJ_400x400.jpg"
+				"albumTitle": "Recovery",
+				"albumCover":
+					"https://yt3.ggpht.com/a-/AJLlDp3OYmRjOHQJqi4UFHRtgqjMccQL6FoTOXehLA=s900-mo-c-c0xffffffff-rj-k-no"
 			}
 		]
 	}

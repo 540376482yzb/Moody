@@ -4,9 +4,8 @@ const initialState = {
 	pause: false,
 	error: null,
 	artist: null,
-	duration: null,
 	albumTitle: null,
-	songTitle: null,
+	title: null,
 	albumCover: null
 }
 

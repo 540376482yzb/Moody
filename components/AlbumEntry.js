@@ -8,11 +8,9 @@ export class AlbumEntry extends React.Component {
 		this._onPress = this._onPress.bind(this)
 	}
 	_onPress() {
-		const { artist, playLists, albumTitle, albumCover } = this.props
+		const { playLists } = this.props
 		this.props.navigation.navigate('Detail', {
-			playLists,
-			albumTitle,
-			albumCover
+			playLists
 		})
 	}
 	render() {
@@ -21,14 +19,14 @@ export class AlbumEntry extends React.Component {
 			<TouchableOpacity onPress={this._onPress}>
 				<View style={styles.container}>
 					<View style={styles.imgContainer}>
-						<Image source={require('./images/cover_1.jpg')} style={styles.image} />
+						<Image source={{ uri: albumCover }} style={styles.image} />
 					</View>
 					<View style={styles.text}>
 						<View>
-							<Text>Album title</Text>
+							<Text>{albumTitle}</Text>
 						</View>
 						<View>
-							<Text style={styles.sub}>Artist</Text>
+							<Text style={styles.sub}>{artist}</Text>
 						</View>
 					</View>
 				</View>

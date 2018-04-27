@@ -13,14 +13,6 @@ export default class DetailScreen extends React.Component {
 	_keyExtractor = (item, index) => index.toString()
 
 	render() {
-		return (
-			<View>
-				<Text>Detail</Text>
-			</View>
-		)
-	}
-	render() {
-		console.log('hi')
 		const { params } = this.props.navigation.state
 		if (!params) {
 			return (

@@ -1,50 +1,17 @@
 [
 	{
 		"artist": "Eminem",
-		"artistImg": "null",
+		"artistImg":
+			"https://yt3.ggpht.com/a-/AJLlDp3OYmRjOHQJqi4UFHRtgqjMccQL6FoTOXehLA=s900-mo-c-c0xffffffff-rj-k-no",
 		"playLists": [
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" }
-		]
-	},
-	{
-		"artist": "Eminem",
-		"artistImg": "null",
-		"playLists": [
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" }
-		]
-	},
-	{
-		"artist": "Eminem",
-		"artistImg": "null",
-		"playLists": [
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" }
-		]
-	},
-	{
-		"artist": "Eminem",
-		"artistImg": "null",
-		"playLists": [
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" },
-			{ "title": "Like the way you lie", "url": "null", "duration": "03:56" }
+			{
+				"title": "Like the way you lie",
+				"artist": "Eminem",
+				"url": "null",
+				"albumTitle": "Recovery",
+				"albumCover":
+					"https://yt3.ggpht.com/a-/AJLlDp3OYmRjOHQJqi4UFHRtgqjMccQL6FoTOXehLA=s900-mo-c-c0xffffffff-rj-k-no"
+			}
 		]
 	}
 ]

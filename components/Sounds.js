@@ -11,8 +11,7 @@ export default class SoundsScreen extends React.Component {
 				arr.push({
 					artist,
 					title: sound.title,
-					url: sound.url,
-					duration: sound.duration,
+					albumTitle: sound.albumTitle,
 					albumCover: sound.albumCover
 				})
 			})

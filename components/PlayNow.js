@@ -2,8 +2,8 @@ import React from 'react'
 import { Button, Text, View, Image, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { Slider } from 'react-native-elements'
-import { Player, MediaStates } from 'react-native-audio-toolkit'
-export default class PlayScreen extends React.Component {
+import { connect } from 'react-redux'
+export class PlayScreen extends React.Component {
 	static navigationOptions = {
 		title: 'Play'
 		/* No more header config here! */
@@ -18,35 +18,24 @@ export default class PlayScreen extends React.Component {
 			IsPlaying: false
 		}
 	}
+
 	_onPress() {
-		this.player = new Player(
-			'https://drive.google.com/uc?export=download&id=1a-UD-WKvM_faKA5cG1noNGBqpq7A050G'
-		)
-		new Promise(resolve => {
-			return resolve(this.player)
-		}).then(() => {
-			this.player.prepare(err => {
-				this.player.play()
-			})
-		})
-		// this.player.prepare(err => {
-		// 	let seconds = this.player.duration / 1000 //duration is in milliseconds
-		// })
-		// this.player.play(() => {
-		// 	console.log('hello')
+		// if (this.player) {
+		// 	this.player.destroy()
+		// }
+		// this.player = new Player(remoteURL, {
+		// 	autoDestroy: true
+		// }).prepare(err => {
+		// 	if (err) {
+		// 		console.log('error at _reloadPlayer():')
+		// 		return console.log(err)
+		// 	}
+		// 	this.player.play()
 		// })
 	}
+
 	render() {
-		const { params } = this.props.navigation.state
-		if (!params) {
-			return (
-				<View>
-					<Text>Loading</Text>
-				</View>
-			)
-		}
-		const { artist, title } = params
-		const albumCover = 'https://reactjs.org/logo-og.png'
+		const { artist, title, albumTitle, albumCover } = this.props.info
 
 		return (
 			<View style={styles.container}>
@@ -61,18 +50,15 @@ export default class PlayScreen extends React.Component {
 				</View>
 				{/* center record */}
 				<View style={styles.record}>
-					<Image
-						source={{ uri: 'https://facebook.github.io/react/logo-og.png' }}
-						style={styles.recordImg}
-					/>
+					<Image source={{ uri: albumCover }} style={styles.recordImg} />
 					<View style={styles.recordCenter} />
 				</View>
 				{/* display title */}
 				<View style={styles.text}>
-					<Text style={styles.primary}>Like the way you lie</Text>
+					<Text style={styles.primary}>{title}</Text>
 					<View style={styles.subText}>
-						<Text style={styles.second}>Album Name</Text>
-						<Text style={styles.second}> - Eminem</Text>
+						<Text style={styles.second}>{albumTitle}</Text>
+						<Text style={styles.second}> - {artist}</Text>
 					</View>
 				</View>
 				{/* progress control  */}
@@ -88,13 +74,13 @@ export default class PlayScreen extends React.Component {
 					</View>
 				</View>
 				<View style={styles.playArea}>
-					<Icon name="rotate-left" type="font-awesome" size={36} color="white" />
-					<Icon name="step-backward" type="font-awesome" size={36} color="white" />
+					<Icon name="rotate-left" type="font-awesome" size={24} color="white" />
+					<Icon name="step-backward" type="font-awesome" size={28} color="white" />
 					<TouchableOpacity onPress={this._onPress}>
 						<Icon name="play" type="font-awesome" size={36} color="white" />
 					</TouchableOpacity>
-					<Icon name="step-forward" type="font-awesome" size={36} color="white" />
-					<Icon name="shuffle" type="foundation" size={36} color="white" />
+					<Icon name="step-forward" type="font-awesome" size={28} color="white" />
+					<Icon name="shuffle" type="foundation" size={24} color="white" />
 				</View>
 			</View>
 		)
@@ -161,14 +147,16 @@ const styles = {
 	},
 	text: {
 		padding: 5,
-		paddingLeft: 100
+		alignItems: 'center'
 	},
 	primary: {
 		color: 'white',
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		marginBottom: 10,
+		marginTop: 10
 	},
 	second: {
-		color: 'white'
+		color: '#F5F5F5'
 	},
 	subText: {
 		flexDirection: 'row',
@@ -182,3 +170,9 @@ const styles = {
 		paddingTop: 20
 	}
 }
+const mapStateToProps = state => {
+	return {
+		info: state
+	}
+}
+export default connect(mapStateToProps)(PlayScreen)

@@ -1,13 +1,12 @@
 import React from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import { connect } from 'react-redux'
+import { setCurrentSong } from '../actions/play'
 export class ListEntry extends React.Component {
 	_onPressButton() {
-		const { albumCover, title, artist } = this.props.entry
-		this.props.navigation.navigate('Play', {
-			title,
-			artist
-		})
+		this.props.dispatch(setCurrentSong(this.props.entry))
+		this.props.navigation.navigate('Play')
 	}
 
 	render() {
@@ -56,4 +55,4 @@ const styles = {
 	}
 }
 
-export default withNavigation(ListEntry)
+export default withNavigation(connect()(ListEntry))
