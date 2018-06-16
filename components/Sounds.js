@@ -1,7 +1,8 @@
-import React from 'react'
-import { Text, View, TouchableOpacity, Alert, FlatList } from 'react-native'
-import ListEntry from './ListEntry'
-import soundList from '../soundlist.json'
+import React from "react"
+import {Text, View, FlatList} from "react-native"
+import ListEntry from "./ListEntry"
+import soundList from "../soundlist.json"
+
 export default class SoundsScreen extends React.Component {
 	_flattenList(soundList) {
 		const arr = []
@@ -18,7 +19,7 @@ export default class SoundsScreen extends React.Component {
 		})
 		return arr
 	}
-	_renderItem = ({ item }) => <ListEntry entry={item} />
+	_renderItem = ({item}) => <ListEntry entry={item} />
 	_keyExtractor = (item, index) => index.toString()
 	render() {
 		this.myList = this._flattenList(soundList)

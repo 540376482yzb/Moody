@@ -1,21 +1,20 @@
-import { SET_CURRENT_SONG, REQUESTING } from '../actions/play'
+import {SET_CURRENT_SONG, SET_PLAYLIST} from "../actions/play"
+import produce from "immer"
 const initialState = {
-	loading: false,
-	pause: false,
-	error: null,
 	artist: null,
 	albumTitle: null,
 	title: null,
-	albumCover: null
+	albumCover: null,
+	playList: []
 }
 
-export default function playReducer(state = initialState, action) {
-	let newState
-	if (action.type === SET_CURRENT_SONG) {
-		return { ...state, ...action.song }
-	}
-	if (action.type === REQUESTING) {
-		return { ...state, loading: true }
-	}
-	return state
-}
+export const playReducer = (state = initialState, action) =>
+	produce(state, draft => {
+		if (action.type === SET_CURRENT_SONG) {
+			return {...state, ...action.song}
+		}
+		if (action.type === SET_PLAY_LIST) {
+			return {...state, playList: action.songs}
+		}
+		return state
+	})

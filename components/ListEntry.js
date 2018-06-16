@@ -1,16 +1,16 @@
-import React from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
-import { withNavigation } from 'react-navigation'
-import { connect } from 'react-redux'
-import { setCurrentSong } from '../actions/play'
+import React from "react"
+import {Text, View, TouchableOpacity} from "react-native"
+import {withNavigation} from "react-navigation"
+import {connect} from "react-redux"
+import {setCurrentSong} from "../actions/play"
 export class ListEntry extends React.Component {
 	_onPressButton() {
 		this.props.dispatch(setCurrentSong(this.props.entry))
-		this.props.navigation.navigate('Play')
+		this.props.navigation.navigate("Play")
 	}
 
 	render() {
-		const { title, artist, duration } = this.props.entry
+		const {title, artist} = this.props.entry
 		return (
 			<TouchableOpacity onPress={() => this._onPressButton()}>
 				<View style={styles.entry}>
@@ -19,11 +19,8 @@ export class ListEntry extends React.Component {
 							<Text>{title}</Text>
 						</View>
 						<View>
-							<Text style={{ color: 'grey' }}>{artist ? ` - ${artist}` : ''}</Text>
+							<Text style={{color: "grey"}}>{artist ? ` - ${artist}` : ""}</Text>
 						</View>
-					</View>
-					<View style={styles.length}>
-						<Text> {duration}</Text>
 					</View>
 				</View>
 			</TouchableOpacity>
@@ -35,20 +32,20 @@ const styles = {
 	entry: {
 		marginLeft: 10,
 		padding: 10,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
+		flexDirection: "row",
+		justifyContent: "space-between",
 		borderBottomWidth: 0.25,
 		borderTopWidth: 0.25,
-		borderColor: 'grey',
+		borderColor: "grey",
 		paddingTop: 15,
 		paddingBottom: 15
 	},
 	body: {
-		flexDirection: 'row',
-		justifyContent: 'flex-start'
+		flexDirection: "row",
+		justifyContent: "flex-start"
 	},
 	sub: {
-		color: 'grey'
+		color: "grey"
 	},
 	length: {
 		marginRight: 20
