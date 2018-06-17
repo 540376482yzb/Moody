@@ -10,3 +10,8 @@ export const setPlayList = songs => ({
 	type: SET_PLAYLIST,
 	songs
 })
+export const SAVE_PROGRESS = "SAVE_PROGRESS"
+export const saveProgress = progress => ({
+	type: SAVE_PROGRESS,
+	progress
+})

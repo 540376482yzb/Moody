@@ -1,5 +1,6 @@
 import React from "react"
 import {Text, View, TouchableOpacity} from "react-native"
+import {Icon} from "react-native-elements"
 import {withNavigation} from "react-navigation"
 import {connect} from "react-redux"
 import {setCurrentSong} from "../actions/play"
@@ -11,11 +12,14 @@ export class ListEntry extends React.Component {
 
 	render() {
 		const {title, artist} = this.props.entry
+		const {active} = this.props
 		return (
 			<TouchableOpacity onPress={() => this._onPressButton()}>
 				<View style={styles.entry}>
 					<View style={styles.body}>
-						<View>
+						{active && <Icon name="play" type="font-awesome" size={12} color="black" />}
+
+						<View style={styles.title}>
 							<Text>{title}</Text>
 						</View>
 						<View>
@@ -43,6 +47,9 @@ const styles = {
 	body: {
 		flexDirection: "row",
 		justifyContent: "flex-start"
+	},
+	title: {
+		paddingLeft: 5
 	},
 	sub: {
 		color: "grey"

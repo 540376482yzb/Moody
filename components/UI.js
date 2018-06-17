@@ -1,27 +1,44 @@
-import React from 'react'
-import { Button, Text, View } from 'react-native'
-import { Ionicons } from '@expo/vector-icons' // Version can be specified in package.json
-import { StackNavigator, TabNavigator, TabBarTop } from 'react-navigation' // Version can be specified in package.json
-import Collections from './Collections'
-import PlayScreen from './PlayNow'
-import DetailScreen from './DetailScreen'
+import {StackNavigator} from "react-navigation" // Version can be specified in package.json
+import Collections from "./Collections"
+import DetailScreen from "./DetailScreen"
+import {View, Text} from "react-native"
+import React from "react"
+import Player from "./Player"
+import PlayScreen from "./PlayNow"
 
-export default StackNavigator(
+export const Navigator = StackNavigator(
 	{
-		Home: { screen: Collections },
-		Play: { screen: PlayScreen },
-		Detail: { screen: DetailScreen }
+		Home: {screen: Collections},
+		Play: {screen: PlayScreen},
+		Detail: {screen: DetailScreen}
 	},
 	{
 		navigationOptions: {
-			title: 'Moody',
+			title: "Moody",
 			headerStyle: {
-				backgroundColor: '#f4511e'
+				backgroundColor: "#f4511e"
 			},
-			headerTintColor: '#fff',
+			headerTintColor: "#fff",
 			headerTitleStyle: {
-				fontWeight: 'bold'
+				fontWeight: "bold"
 			}
 		}
 	}
 )
+
+export default function App(props) {
+	return (
+		<View style={styles.container}>
+			<Navigator />
+			<Player style={styles.player} />
+		</View>
+	)
+}
+
+const styles = {
+	container: {
+		flex: 1
+	},
+
+	player: {}
+}

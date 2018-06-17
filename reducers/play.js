@@ -1,20 +1,28 @@
-import {SET_CURRENT_SONG, SET_PLAYLIST} from "../actions/play"
-import produce from "immer"
+import {SET_CURRENT_SONG, SET_PLAYLIST, SAVE_PROGRESS} from "../actions/play"
 const initialState = {
-	artist: null,
-	albumTitle: null,
-	title: null,
-	albumCover: null,
-	playList: []
+	currentSong: {
+		artist: null,
+		albumTitle: null,
+		title: null,
+		albumCover: null,
+		index: null
+	},
+	playList: [],
+	soundObject: null
 }
 
-export const playReducer = (state = initialState, action) =>
-	produce(state, draft => {
-		if (action.type === SET_CURRENT_SONG) {
-			return {...state, ...action.song}
-		}
-		if (action.type === SET_PLAY_LIST) {
-			return {...state, playList: action.songs}
-		}
-		return state
-	})
+export const playReducer = (state = initialState, action) => {
+	switch (action.type) {
+		case SET_CURRENT_SONG:
+			return {...state, currentSong: {...action.song}}
+		case SET_PLAYLIST:
+			return {...state, playList: [...action.songs]}
+		case SAVE_PROGRESS:
+			console.log("save progress", action.progress)
+			return {...state, progress: action.progress}
+		default:
+			return state
+	}
+}
+
+export default playReducer
