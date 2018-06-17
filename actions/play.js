@@ -10,8 +10,15 @@ export const setPlayList = songs => ({
 	type: SET_PLAYLIST,
 	songs
 })
-export const SAVE_PROGRESS = "SAVE_PROGRESS"
-export const saveProgress = progress => ({
-	type: SAVE_PROGRESS,
-	progress
+
+export const PLAY_STATUS_UPDATE = "PLAY_STATUS_UPDATE"
+export const playStatusUpdate = status => ({
+	type: PLAY_STATUS_UPDATE,
+	status
+})
+export const CHANGE_SETTING = "CHANGE_SETTING"
+export const changeSetting = (optionName, optionValue) => ({
+	type: CHANGE_SETTING,
+	optionName,
+	optionValue
 })

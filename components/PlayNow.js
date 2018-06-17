@@ -1,8 +1,9 @@
 import React from "react"
-import {Text, View, Image, Animated} from "react-native"
+import {Text, View, Image, Animated, Easing} from "react-native"
 import {Icon} from "react-native-elements"
 import {Slider} from "react-native-elements"
 import {connect} from "react-redux"
+import {changeSetting} from "../actions/play"
 export class PlayScreen extends React.Component {
 	static navigationOptions = {
 		title: "Play"
@@ -13,43 +14,52 @@ export class PlayScreen extends React.Component {
 		this.isSeeking = false
 		this.spinValue = new Animated.Value(0)
 	}
-	getDuration() {
-		// const {playbackInstancePosition, playbackInstanceDuration} = this.state
-		// const timeLeft = playbackInstanceDuration - playbackInstancePosition
-		// return this._convertMisToMinutes(timeLeft)
+	getDuration(currentPosition, duration) {
+		const timeLeft = duration - currentPosition
+		return this._convertMisToMinutes(timeLeft)
 	}
 	_convertMisToMinutes(ms = 0) {
-		// const totalSeconds = Number(ms) / 1000
-		// const minutes = Math.round(totalSeconds / 60)
-		// const second = Math.round(totalSeconds % 60).toString()
-		// const paddedSecond = second.length === 1 ? `0${second}` : second
-		// return `${minutes}:${paddedSecond}`
+		const totalSeconds = Number(ms) / 1000
+		const minutes = Math.round(totalSeconds / 60)
+		const second = Math.round(totalSeconds % 60).toString()
+		const paddedSecond = second.length === 1 ? `0${second}` : second
+		return `${minutes}:${paddedSecond}`
 	}
 
-	_onSeekingPosition() {
-		// if (this.sound) {
-		// 	console.log("I am seeking")
-		// 	this.isSeeking = true
-		// }
-	}
 	handleSliderDragCompleted = data => {
-		// this.isSeeking = false
-		// const {playbackInstanceDuration} = this.state
-		// this._updatePlayPosition(Math.round((data / 100) * playbackInstanceDuration))
-		// this._audioResume()
+		this.isSeeking = false
+		console.log("drag completed")
+		const {duration} = this.props
+		this._updatePlayPosition(Math.round((data / 100) * duration))
 	}
 
-	// async handleVolumeControl(value) {
-	// 	await this.sound.setVolumeAsync(value)
-	// }
+	handleVolumeControl = value => {
+		const {dispatch} = this.props
+		console.log("volume control", value)
+		dispatch(changeSetting("volume", value))
+	}
 
-	// async _updatePlayPosition(position) {
-	// 	await this.sound.setPositionAsync(position)
-	// }
+	async _updatePlayPosition(position) {
+		const {dispatch} = this.props
+		dispatch(changeSetting("positionMillis", position))
+	}
+
+	startAnimation = () => {
+		this.spinValue.setValue(0)
+		Animated.timing(this.spinValue, {
+			toValue: 1,
+			duration: 15000,
+			easing: Easing.linear,
+			useNativeDriver: true
+		}).start(() => this.startAnimation())
+	}
+	componentDidMount() {
+		this.startAnimation()
+	}
 
 	render() {
-		const {artist, title, albumTitle, albumCover} = this.props.info
-
+		const {artist, title, albumTitle, albumCover} = this.props.currentSong
+		const {volume = 1, currentPosition = 0, duration = 1} = this.props
 		const spin = this.spinValue.interpolate({
 			inputRange: [0, 1],
 			outputRange: ["0deg", "359deg"]
@@ -78,10 +88,13 @@ export class PlayScreen extends React.Component {
 					<Icon name="ios-volume-up" type="ionicon" size={24} color="white" />
 					<View style={styles.slide}>
 						<Slider
-							value={0}
+							value={volume}
 							thumbStyle={{width: 10, height: 10}}
-							onValueChange={this.handleVolumeControl}
-							step={0.1}
+							minimumTrackTintColor="white"
+							maximumTrackTintColor="grey"
+							onSlidingComplete={this.handleVolumeControl}
+							step={0.01}
+							thumbStyle={{width: 12, height: 12, backgroundColor: "tomato"}}
 						/>
 					</View>
 				</View>
@@ -110,16 +123,15 @@ export class PlayScreen extends React.Component {
 				<View style={styles.progress}>
 					<View style={styles.control}>
 						<Slider
-							value={Math.round((0 / 100) * 100) || 0}
+							value={Math.round((currentPosition / duration) * 100) || 0}
 							minimumTrackTintColor="red"
 							thumbStyle={{width: 10, height: 10, backgroundColor: "white"}}
 							maximumValue={100}
-							onValueChange={() => this._onSeekingPosition()}
 							onSlidingComplete={this.handleSliderDragCompleted}
 						/>
 					</View>
 					<View style={styles.duration}>
-						<Text style={{color: "white"}}>...</Text>
+						<Text style={{color: "white"}}>{this.getDuration(currentPosition, duration)}</Text>
 					</View>
 				</View>
 			</View>
@@ -128,8 +140,12 @@ export class PlayScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
+	const {currentSong, playStatus} = state.playReducer
 	return {
-		info: state.playReducer
+		currentSong: currentSong,
+		currentPosition: playStatus.playbackInstancePosition,
+		duration: playStatus.playbackInstanceDuration,
+		volume: playStatus.volume
 	}
 }
 export default connect(mapStateToProps)(PlayScreen)

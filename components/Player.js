@@ -3,19 +3,20 @@ import {Text, View, Image, TouchableOpacity, Animated, Easing} from "react-nativ
 import {Icon} from "react-native-elements"
 import {connect} from "react-redux"
 import {Audio} from "expo"
-import {saveProgress} from "../actions/play"
+import {playStatusUpdate} from "../actions/play"
+
+const updateInitialStatus = playStatus => playStatus
+
 export class Play extends React.Component {
 	static navigationOptions = {
 		title: "Play"
 		/* No more header config here! */
 	}
-
 	constructor(props) {
 		super(props)
+		this.sound = null
 		this._onPress = this._onPress.bind(this)
-		this.handleVolumeControl = this.handleVolumeControl.bind(this)
-		this.isSeeking = false
-		this.spinValue = new Animated.Value(0)
+
 		this.state = {
 			shouldPlay: true,
 			isPlaying: true,
@@ -27,45 +28,28 @@ export class Play extends React.Component {
 			loopingType: 0
 		}
 	}
-
 	_onPress() {
 		this.setState(prevState => {
+			if (prevState.isPlaying) this._audioPause()
+			else this._audioResume()
 			return {
 				isPlaying: !prevState.isPlaying
 			}
 		})
 	}
 	async _audioPause() {
-		await this.sound.pauseAsync()
+		if (this.sound) await this.sound.pauseAsync()
 	}
 	async _audioResume() {
-		if (!this.sound) {
-			await _loadNewPlaybackInstance()
-		} else {
+		if (this.sound) {
 			await this.sound.playAsync()
 		}
-		this.startAnimation()
 	}
 
 	_onPlaybackStatusUpdate = status => {
+		const {dispatch} = this.props
 		if (status.isLoaded) {
-			this.setState({
-				playbackInstancePosition: status.positionMillis,
-				playbackInstanceDuration: status.durationMillis,
-				shouldPlay: status.shouldPlay,
-				isBuffering: status.isBuffering,
-				muted: status.isMuted,
-				volume: status.volume,
-				loopingType: status.isLooping ? 1 : 0
-			})
-			//   if (status.didJustFinish && !status.isLooping) {
-			//     this._advanceIndex(true);
-			//     this._updatePlaybackInstanceForIndex(true);
-			//   }
-			// } else {
-			//   if (status.error) {
-			//     console.log(`FATAL PLAYER ERROR: ${status.error}`);
-			//   }
+			dispatch(playStatusUpdate(status))
 		}
 	}
 	async _unloadPlayback() {
@@ -73,57 +57,10 @@ export class Play extends React.Component {
 		this.sound.setOnPlaybackStatusUpdate(null)
 		this.sound = null
 	}
-
-	getDuration() {
-		const {playbackInstancePosition, playbackInstanceDuration} = this.state
-		const timeLeft = playbackInstanceDuration - playbackInstancePosition
-		return this._convertMisToMinutes(timeLeft)
+	async _changeSetting(name, value) {
+		await this.sound.setStatusAsync({[name]: value})
 	}
-	_convertMisToMinutes(ms = 0) {
-		const totalSeconds = Number(ms) / 1000
-		const minutes = Math.round(totalSeconds / 60)
-		const second = Math.round(totalSeconds % 60).toString()
-		const paddedSecond = second.length === 1 ? `0${second}` : second
-		return `${minutes}:${paddedSecond}`
-	}
-
-	_onSeekingPosition() {
-		if (this.sound) {
-			console.log("I am seeking")
-			this.isSeeking = true
-			this._audioPause()
-		}
-	}
-	handleSliderDragCompleted = data => {
-		this.isSeeking = false
-		const {playbackInstanceDuration} = this.state
-		this._updatePlayPosition(Math.round((data / 100) * playbackInstanceDuration))
-		this._audioResume()
-	}
-
-	async handleVolumeControl(value) {
-		await this.sound.setVolumeAsync(value)
-	}
-
-	async _updatePlayPosition(position) {
-		await this.sound.setPositionAsync(position)
-	}
-
-	startAnimation = () => {
-		if (!this.state.isPlaying) {
-			this.spinValue.setValue(1)
-			return
-		}
-		this.spinValue.setValue(0)
-		Animated.timing(this.spinValue, {
-			toValue: 1,
-			duration: 15000,
-			easing: Easing.linear,
-			useNativeDriver: true
-		}).start(() => this.startAnimation())
-	}
-
-	async _loadNewPlaybackInstance() {
+	async _loadNewPlaybackInstance(currentSong, status) {
 		try {
 			if (this.sound) {
 				this._unloadPlayback()
@@ -132,40 +69,48 @@ export class Play extends React.Component {
 				uri:
 					"https://s3.amazonaws.com/exp-us-standard/audio/playlist-example/Podington_Bear_-_Rubber_Robot.mp3"
 			}
-			const initialStatus = {
-				shouldPlay: true,
-				volume: this.state.volume,
-				isMuted: this.state.muted,
-				isLooping: this.state.loopingType
-			}
-			const {sound} = await Audio.Sound.create(
-				require("../assets/music1.mp3"),
-				initialStatus,
-				this._onPlaybackStatusUpdate
-			)
+			const initialStatus = updateInitialStatus(status)
+			const {sound} = await Audio.Sound.create(source, initialStatus, this._onPlaybackStatusUpdate)
+			this.sound = sound
+			await this.sound.playAsync()
+			this.setState({isPlaying: true})
 		} catch (err) {
 			console.log(err)
 		}
 	}
+	changeSong = (currentIndex, playList, forward) => {
+		const nextIndex = (currentIndex + (forward ? 1 : -1)) % playList.length
+		return playList[nextIndex]
+	}
 
-	componentDidUpdate(prevProps, prevState) {
-		const {isPlaying} = this.state
-		if (this.sound) {
-			if (prevState.isPlaying && !isPlaying) {
-				console.log("pause")
-				this._audioPause()
-			}
-			if (!prevState.isPlaying && isPlaying) {
-				this._audioResume()
-			}
+	backward = () => {
+		const {currentSong, playList} = this.props
+		const nextSong = this.changeSong(currentSong.index, playList, false)
+		console.log(nextSong)
+	}
+	forward = () => {
+		const {currentSong, playList} = this.props
+		const nextSong = this.changeSong(currentSong.index, playList, true)
+		console.log(nextSong)
+	}
+
+	componentDidUpdate(prevProps) {
+		const {currentSong, changeSetting: currentSetting = {}, playStatus} = this.props
+		const {currentSong: prevSong = {}, changeSetting: prevSetting = {}} = prevProps
+		const initialized = currentSong.index && !prevSong
+		const changeSong = prevSong.index !== currentSong.index
+
+		if (initialized || changeSong) {
+			this._loadNewPlaybackInstance(currentSong, playStatus)
+		}
+
+		if (currentSetting && prevSetting.optionValue !== currentSetting.optionValue) {
+			this._changeSetting(currentSetting.optionName, currentSetting.optionValue)
 		}
 	}
 
 	componentWillUnmount() {
-		console.log("unmounting")
 		this._unloadPlayback()
-		const {dispatch} = this.props
-		dispatch(saveProgress(this.state))
 	}
 
 	componentDidMount() {
@@ -176,39 +121,55 @@ export class Play extends React.Component {
 			shouldDuckAndroid: true,
 			interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX
 		})
-		this._loadNewPlaybackInstance()
 	}
 
 	render() {
-		const {artist, title, albumTitle, albumCover} = this.props.info
+		const {currentSong} = this.props
 		const {isPlaying} = this.state
+		if (!currentSong.artist) return <View />
 		return (
 			<View style={styles.playArea}>
-				<Icon name="rotate-left" type="font-awesome" size={24} color="white" />
-				<Icon name="step-backward" type="font-awesome" size={28} color="white" />
+				<Image source={{uri: currentSong.albumCover}} style={styles.image} />
+				<Icon name="rotate-left" type="font-awesome" size={18} color="white" />
+				<TouchableOpacity onPress={this.backward}>
+					<Icon name="step-backward" type="font-awesome" size={20} color="white" />
+				</TouchableOpacity>
 				{isPlaying && (
 					<TouchableOpacity onPress={this._onPress}>
-						<Icon name="pause" type="font-awesome" size={36} color="white" />
+						<Icon name="pause" type="font-awesome" size={25} color="white" />
 					</TouchableOpacity>
 				)}
 				{!isPlaying && (
 					<TouchableOpacity onPress={this._onPress}>
-						<Icon name="play" type="font-awesome" size={36} color="white" />
+						<Icon name="play" type="font-awesome" size={25} color="white" />
 					</TouchableOpacity>
 				)}
-
-				<Icon name="step-forward" type="font-awesome" size={28} color="white" />
-				<Icon name="shuffle" type="foundation" size={24} color="white" />
+				<TouchableOpacity onPress={this.forward}>
+					<Icon name="step-forward" type="font-awesome" size={20} color="white" />
+				</TouchableOpacity>
+				<Icon name="shuffle" type="foundation" size={18} color="white" />
 			</View>
 		)
 	}
 }
 const mapStateToProps = state => {
 	return {
-		info: state.playReducer
+		currentSong: state.playReducer.currentSong,
+		changeSetting: state.playReducer.changeSetting,
+		playStatus: state.playReducer.playStatus,
+		playList: state.playReducer.playList
 	}
 }
 export default connect(mapStateToProps)(Play)
+
+// const initialStatus = {
+// 	shouldPlay: true,
+// 	isBuffering: false,
+// 	muted: false,
+// 	volume: 1,
+// 	loopingType: 0
+// }
+
 const styles = {
 	playArea: {
 		flexDirection: "row",
@@ -216,5 +177,10 @@ const styles = {
 		alignItems: "center",
 		padding: 10,
 		backgroundColor: "tomato"
+	},
+	image: {
+		width: 50,
+		height: 50,
+		borderRadius: 5
 	}
 }
